@@ -4472,8 +4472,8 @@ const fieldsMap = {
 }
 
 ;(async () => {
-    const headerTenant = window.localStorage.getItem('base-ui_TENANT')
-    const headerToken = window.localStorage.getItem('base-ui_TOKEN')
+    const headerTenant = JSON.parse(window.localStorage.getItem('base-ui_TENANT'))
+    const headerToken = JSON.parse(window.localStorage.getItem('base-ui_TOKEN'))
     const headerAuth = btoa('5yp052kwxezrhqwehdlwh4wo:y08ah4fqf203gscso2bcujoy2spv66iv') // VUE_APP_CLIENT_ID + VUE_APP_CLIENT_SECRET
     const input = document.createElement('input')
     input.type = 'file'
@@ -4481,6 +4481,7 @@ const fieldsMap = {
 
     input.addEventListener('change', (e) => {
         if (window.inputError) window.inputError.remove()
+        if (window.inputErrorEmpty) window.inputErrorEmpty.remove()
         if (window.inputFileError) window.inputFileError.remove()
         if (window.inputTypeError) window.inputTypeError.remove()
         if (window.inputCodeEmptyError) window.inputCodeEmptyError.remove()
@@ -4488,6 +4489,7 @@ const fieldsMap = {
         if (window.inputLoading) window.inputLoading.remove()
         
         const errorCollect = []
+        const errorEmptyCollect = []
         const file = e.target.files?.[0]
         if (file) {
             try {
@@ -4516,62 +4518,74 @@ const fieldsMap = {
                     window.inputLoading = document.createElement('input')
                     window.inputLoading.type = 'text'
                     window.inputLoading.value = '正在处理中，请稍后...'
-                    document.querySelector('.app-main').insertBefore(window.inputLoading, document.querySelector('.app-main').children[0]); 
-                    for(let i=0;i<realData.length;i++){
-                        if (!requestDataMap[data[0].join('@@')]) {
-                            alert('车间名称和工序名称不匹配！')
-                            if (window.inputLoading) window.inputLoading.remove()
-                            throw 'error'
-                        }
-                        const requestData = JSON.parse(JSON.stringify(requestDataMap[data[0].join('@@')]))
-                        fields.map((field, fieldIndex) => {
-                            const userData = realData[i][fieldIndex]?.toString()
-                            if (field === '窑车号') {
-                                requestData.kilncarName = userData
-                            } else {
-                                const item = requestData.newmesWorkBarUpdateDTOList.find(v => v.barName === field)
-                                item.bar = userData
+                    document.querySelector('.app-main').insertBefore(window.inputLoading, document.querySelector('.app-main').children[0]);
+                    if (!requestDataMap[data[0].join('@@')]) {
+                        alert('车间名称和工序名称不匹配！')
+                        if (window.inputLoading) window.inputLoading.remove()
+                        throw '车间名称和工序名称不匹配！'
+                    }
+                    const realDataLength = realData.length
+                    for(let i=0;i<realDataLength;i++){
+                        window.inputLoading.value = `处理中(${i+1}/${realDataLength})`
+                        if (realData[i].filter(Boolean).length !== fields.length) {
+                            errorEmptyCollect.push(i+4)
+                        } else {
+                            const requestData = JSON.parse(JSON.stringify(requestDataMap[data[0].join('@@')]))
+                            fields.map((field, fieldIndex) => {
+                                const userData = realData[i][fieldIndex]?.toString()
+                                if (field === '窑车号') {
+                                    requestData.kilncarName = userData
+                                } else {
+                                    const item = requestData.newmesWorkBarUpdateDTOList.find(v => v.barName === field)
+                                    item.bar = userData
+                                }
+                            })
+                            if (peoples && peoples.length) {
+                                requestData
+                                peoples.map((people) => {
+                                    const [job, name, code] = people.split('-')
+                                    const item = requestData.newmesWorkJockeyUpdateDTOList.find(v => v.jockeyName === job)
+                                    if (item) {
+                                        item.employeeNo = code
+                                        item.employeeName = name
+                                    }
+                                })
                             }
-                        })
-                        if (peoples && peoples.length) {
-                            requestData
-                            peoples.map((people) => {
-                                const [job, name, code] = people.split('-')
-                                const item = requestData.newmesWorkJockeyUpdateDTOList.find(v => v.jockeyName === job)
-                                if (item) {
-                                    item.employeeNo = code
-                                    item.employeeName = name
+                            await fetch("http://172.18.9.68:8760/api/jdz/newmes/newmesWorkOrder/singleworkorder", {
+                                "headers": {
+                                    "accept": "application/json, text/plain, */*",
+                                    "accept-language": "zh-CN,zh;q=0.9",
+                                    "authorization": "Basic NXlwMDUya3d4ZXpyaHF3ZWhkbHdoNHdvOnkwOGFoNGZxZjIwM2dzY3NvMmJjdWpveTJzcHY2Nml2",
+                                    "content-type": "application/json;charset=UTF-8",
+                                    "tenant": headerTenant,
+                                    "token": "Bearer " + headerToken
+                                },
+                                "referrer": "http://172.18.9.68:9288/",
+                                "referrerPolicy": "strict-origin-when-cross-origin",
+                                "body": JSON.stringify(requestData),
+                                "method": "POST",
+                                "mode": "cors",
+                                "credentials": "include"
+                            }).then(res => {
+                                if (res.ok) {
+                                    return res.json()
+                                } else {
+                                    errorCollect.push(requestData.newmesWorkBarUpdateDTOList.map(v => `${v.barName}:${v.bar}`).join('-') + (requestData.kilncarName ? `-窑车号${requestData.kilncarName}` : ''))
                                 }
                             })
                         }
-                        await fetch("http://172.18.9.68:8760/api/jdz/newmes/newmesWorkOrder/singleworkorder", {
-                            "headers": {
-                                "accept": "application/json, text/plain, */*",
-                                "accept-language": "zh-CN,zh;q=0.9",
-                                "authorization": "Basic NXlwMDUya3d4ZXpyaHF3ZWhkbHdoNHdvOnkwOGFoNGZxZjIwM2dzY3NvMmJjdWpveTJzcHY2Nml2",
-                                "content-type": "application/json;charset=UTF-8",
-                                "tenant": headerTenant,
-                                "token": "Bearer " + headerToken
-                            },
-                            "referrer": "http://172.18.9.68:9288/",
-                            "referrerPolicy": "strict-origin-when-cross-origin",
-                            "body": JSON.stringify(requestData),
-                            "method": "POST",
-                            "mode": "cors",
-                            "credentials": "include"
-                        }).then(res => {
-                            if (res.ok) {
-                                return res.json()
-                            } else {
-                                errorCollect.push(requestData.newmesWorkBarUpdateDTOList.map(v => `${v.barName}:${v.bar}`).join('-') + (requestData.kilncarName ? `-窑车号${requestData.kilncarName}` : ''))
-                            }
-                        })
                     }
                     if (errorCollect.length) {
                         window.inputError = document.createElement('input')
                         window.inputError.type = 'text'
                         window.inputError.value = '错误数据：' + errorCollect.join('，')
                         document.querySelector('.app-main').insertBefore(window.inputError, document.querySelector('.app-main').children[0]); 
+                    }
+                    if (errorEmptyCollect.length) {
+                        window.inputErrorEmpty = document.createElement('input')
+                        window.inputErrorEmpty.type = 'text'
+                        window.inputErrorEmpty.value = '无效数据：行' + errorEmptyCollect.join('，')
+                        document.querySelector('.app-main').insertBefore(window.inputErrorEmpty, document.querySelector('.app-main').children[0]); 
                     }
                     window.inputLoading.remove()
                     alert('处理完成！请查看是否有错误信息')
