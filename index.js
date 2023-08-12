@@ -4472,6 +4472,9 @@ const fieldsMap = {
 }
 
 ;(async () => {
+    const headerTenant = window.localStorage.getItem('base-ui_TENANT')
+    const headerToken = window.localStorage.getItem('base-ui_TOKEN')
+    const headerAuth = btoa('5yp052kwxezrhqwehdlwh4wo:y08ah4fqf203gscso2bcujoy2spv66iv') // VUE_APP_CLIENT_ID + VUE_APP_CLIENT_SECRET
     const input = document.createElement('input')
     input.type = 'file'
     document.querySelector('.app-main').insertBefore(input, document.querySelector('.app-main').children[0]);
@@ -4547,8 +4550,8 @@ const fieldsMap = {
                                 "accept-language": "zh-CN,zh;q=0.9",
                                 "authorization": "Basic NXlwMDUya3d4ZXpyaHF3ZWhkbHdoNHdvOnkwOGFoNGZxZjIwM2dzY3NvMmJjdWpveTJzcHY2Nml2",
                                 "content-type": "application/json;charset=UTF-8",
-                                "tenant": "MDAwMA==",
-                                "token": "Bearer eyJ0eXAiOiJKc29uV2ViVG9rZW4iLCJhbGciOiJIUzI1NiJ9.eyJvYV9udW0iOiIxMDAwMDU5MDUiLCJuYW1lIjoi5ZGo54Sm6ImvIiwiY2xpZW50X3NlY3JldCI6InkwOGFoNGZxZjIwM2dzY3NvMmJjdWpveTJzcHY2Nml2IiwidG9rZW5fdHlwZSI6InRva2VuIiwidXNlcmlkIjoiMTYyODk1MTY1NDk2OTYzODkxMiIsImFjY291bnQiOiJ6aG91amwiLCJjbGllbnRfaWQiOiI1eXAwNTJrd3hlenJocXdlaGRsd2g0d28iLCJleHAiOjE2OTE4NDMxMTQsIm5iZiI6MTY5MTc5OTMxNH0.EAtClyOXrJferw3fshryhRxE8wxVWam9CyJXLXW6HS4"
+                                "tenant": headerTenant,
+                                "token": "Bearer " + headerToken
                             },
                             "referrer": "http://172.18.9.68:9288/",
                             "referrerPolicy": "strict-origin-when-cross-origin",
