@@ -890,7 +890,7 @@ const requestDataMap = {
       '烧成车间 ( 景德镇生产基地 - 洁具一分厂 )@@进车 (LSXJC)': {
         "workingProcedureNo": "LSXJC",
         "workingProcedureName": "",
-        "kilncarName": "1111111",
+        "kilncarName": "",
         "baseCode": "310",
         "baseLabel": "景德镇生产基地",
         "factoryCode": "31001",
@@ -1006,7 +1006,7 @@ const requestDataMap = {
       '烧成车间 ( 景德镇生产基地 - 洁具一分厂 )@@装车复检返工 (ZCFJFG)': {
         "workingProcedureNo": "ZCFJFG",
         "workingProcedureName": "",
-        "kilncarName": "1111111",
+        "kilncarName": "",
         "baseCode": "310",
         "baseLabel": "景德镇生产基地",
         "factoryCode": "31001",
@@ -1111,7 +1111,7 @@ const requestDataMap = {
       '烧成车间 ( 景德镇生产基地 - 洁具一分厂 )@@喷釉复检 (PYFJ)': {
         "workingProcedureNo": "PYFJ",
         "workingProcedureName": "",
-        "kilncarName": "1111111",
+        "kilncarName": "",
         "baseCode": "310",
         "baseLabel": "景德镇生产基地",
         "factoryCode": "31001",
@@ -1216,7 +1216,7 @@ const requestDataMap = {
       '烧成车间 ( 景德镇生产基地 - 洁具一分厂 )@@喷釉 (SCPY)': {
         "workingProcedureNo": "SCPY",
         "workingProcedureName": "",
-        "kilncarName": "1111111",
+        "kilncarName": "",
         "baseCode": "310",
         "baseLabel": "景德镇生产基地",
         "factoryCode": "31001",
@@ -1355,7 +1355,7 @@ const requestDataMap = {
       '烧成车间 ( 景德镇生产基地 - 洁具一分厂 )@@装车 (SCZC)': {
         "workingProcedureNo": "SCZC",
         "workingProcedureName": "",
-        "kilncarName": "1111111",
+        "kilncarName": "",
         "baseCode": "310",
         "baseLabel": "景德镇生产基地",
         "factoryCode": "31001",
@@ -1472,7 +1472,7 @@ const requestDataMap = {
       '烧成车间 ( 景德镇生产基地 - 洁具一分厂 )@@装车复检 (ZCFJ)': {
         "workingProcedureNo": "ZCFJ",
         "workingProcedureName": "",
-        "kilncarName": "1111111",
+        "kilncarName": "",
         "baseCode": "310",
         "baseLabel": "景德镇生产基地",
         "factoryCode": "31001",
@@ -1577,7 +1577,7 @@ const requestDataMap = {
       '烧成车间 ( 景德镇生产基地 - 洁具一分厂 )@@进车复检 (JCFJ)': {
         "workingProcedureNo": "JCFJ",
         "workingProcedureName": "",
-        "kilncarName": "1111111",
+        "kilncarName": "",
         "baseCode": "310",
         "baseLabel": "景德镇生产基地",
         "factoryCode": "31001",
@@ -2706,7 +2706,7 @@ const requestDataMap = {
       '烧成车间 ( 景德镇生产基地 - 洁具二分厂 )@@进车 (LSXJC)': {
         "workingProcedureNo": "LSXJC",
         "workingProcedureName": "",
-        "kilncarName": "1111111",
+        "kilncarName": "",
         "baseCode": "310",
         "baseLabel": "景德镇生产基地",
         "factoryCode": "31002",
@@ -2961,7 +2961,7 @@ const requestDataMap = {
       '烧成车间 ( 景德镇生产基地 - 洁具二分厂 )@@装车 (SCZC)': {
         "workingProcedureNo": "SCZC",
         "workingProcedureName": "",
-        "kilncarName": "1111111",
+        "kilncarName": "",
         "baseCode": "310",
         "baseLabel": "景德镇生产基地",
         "factoryCode": "31002",
@@ -3300,7 +3300,7 @@ const requestDataMap = {
       '烧成车间 ( 景德镇生产基地 - 洁具三分厂 )@@进车 (LSXJC)': {
         "workingProcedureNo": "LSXJC",
         "workingProcedureName": "",
-        "kilncarName": "11111111",
+        "kilncarName": "",
         "baseCode": "310",
         "baseLabel": "景德镇生产基地",
         "factoryCode": "31003",
@@ -3787,7 +3787,7 @@ const requestDataMap = {
       '烧成车间 ( 景德镇生产基地 - 洁具三分厂 )@@装车 (SCZC)': {
         "workingProcedureNo": "SCZC",
         "workingProcedureName": "",
-        "kilncarName": "111111111",
+        "kilncarName": "",
         "baseCode": "310",
         "baseLabel": "景德镇生产基地",
         "factoryCode": "31003",
@@ -3915,7 +3915,7 @@ const requestDataMap = {
       '烧成车间 ( 景德镇生产基地 - 洁具三分厂 )@@装车复检 (ZCFJ)': {
         "workingProcedureNo": "ZCFJ",
         "workingProcedureName": "",
-        "kilncarName": "111111111",
+        "kilncarName": "",
         "baseCode": "310",
         "baseLabel": "景德镇生产基地",
         "factoryCode": "31003",
@@ -4020,7 +4020,7 @@ const requestDataMap = {
       '烧成车间 ( 景德镇生产基地 - 洁具三分厂 )@@进车复检返工 (JCFCFG)': {
         "workingProcedureNo": "JCFCFG",
         "workingProcedureName": "",
-        "kilncarName": "111111111",
+        "kilncarName": "",
         "baseCode": "310",
         "baseLabel": "景德镇生产基地",
         "factoryCode": "31003",
@@ -4125,7 +4125,7 @@ const requestDataMap = {
       '烧成车间 ( 景德镇生产基地 - 洁具三分厂 )@@进车复检 (JCFJ)': {
         "workingProcedureNo": "JCFJ",
         "workingProcedureName": "",
-        "kilncarName": "111111111",
+        "kilncarName": "",
         "baseCode": "310",
         "baseLabel": "景德镇生产基地",
         "factoryCode": "31003",
